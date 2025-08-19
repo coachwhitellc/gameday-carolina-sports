@@ -277,6 +277,50 @@
             margin: 1rem 0;
         }
 
+        /* MaxPreps Widget Styling */
+        .widget-container {
+            max-width: 1200px;
+            margin: 0 auto 3rem auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+
+        .maxpreps-widget {
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(255,140,66,0.15);
+            border: 2px solid rgba(255,140,66,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .maxpreps-widget:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255,140,66,0.25);
+        }
+
+        .maxpreps-widget iframe {
+            background: white;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .widget-container {
+                grid-template-columns: 1fr;
+                padding: 0 0.5rem;
+            }
+            
+            .maxpreps-widget {
+                padding: 1rem;
+            }
+            
+            .maxpreps-widget iframe {
+                height: 350px;
+            }
+        }
+
         /* Feature Articles Section - Spotlight */
         .spotlight {
             background: linear-gradient(
@@ -447,6 +491,10 @@
             opacity: 0;
             transition: opacity 0.3s ease;
             z-index: -1;
+        }
+
+        .spotlight .article-card:hover::before {
+            opacity: 1;
         }
 
         /* Feature Articles Carousel */
@@ -761,48 +809,15 @@
             border-color: #ff7043;
         }
 
-        /* MaxPreps Widget Styling */
-        .widget-container {
-            max-width: 1200px;
-            margin: 0 auto 3rem auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 2rem;
-            padding: 0 1rem;
+        .upload-text {
+            font-weight: bold;
+            color: #ff8c42;
+            margin-bottom: 0.5rem;
         }
 
-        .maxpreps-widget {
-            background: rgba(255,255,255,0.9);
-            border-radius: 15px;
-            padding: 1.5rem;
-            box-shadow: 0 10px 30px rgba(255,140,66,0.15);
-            border: 2px solid rgba(255,140,66,0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .maxpreps-widget:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(255,140,66,0.25);
-        }
-
-        .maxpreps-widget iframe {
-            background: white;
-            border-radius: 8px;
-        }
-
-        @media (max-width: 768px) {
-            .widget-container {
-                grid-template-columns: 1fr;
-                padding: 0 0.5rem;
-            }
-            
-            .maxpreps-widget {
-                padding: 1rem;
-            }
-            
-            .maxpreps-widget iframe {
-                height: 350px;
-            }
+        .upload-subtext {
+            color: #666;
+            font-size: 0.9rem;
         }
 
         /* Site Counter Styling */
@@ -857,11 +872,6 @@
             font-size: 1.5rem;
             margin-right: 0.5rem;
         }
-
-        .upload-subtext {
-            color: #666;
-            font-size: 0.9rem;
-        }
     </style>
 </head>
 <body>
@@ -906,7 +916,111 @@
 
     <!-- Scores Section -->
     <section id="scores" class="scores">
-            <h2 class="section-title" style="color: #333;">Latest Scores</h2>
+        <h2 class="section-title" style="color: #333;">Latest Scores</h2>
+        
+        <!-- Live MaxPreps Widgets -->
+        <div class="widget-container">
+            <h3 style="text-align: center; color: #333; margin-bottom: 2rem;">Live School Scoreboards</h3>
+            
+            <!-- Indian Land High School -->
+            <div class="maxpreps-widget">
+                <h4 style="color: #ff8c42; text-align: center; margin-bottom: 1rem;">Indian Land Warriors</h4>
+                <iframe 
+                    src="https://www.maxpreps.com/high-schools/indian-land-warriors-(indian-land,sc)/football.htm" 
+                    width="100%" 
+                    height="400" 
+                    frameborder="0"
+                    style="border-radius: 10px;">
+                </iframe>
+            </div>
+            
+            <!-- Fort Mill High School -->
+            <div class="maxpreps-widget">
+                <h4 style="color: #ff8c42; text-align: center; margin-bottom: 1rem;">Fort Mill Yellow Jackets</h4>
+                <iframe 
+                    src="https://www.maxpreps.com/high-schools/fort-mill-yellow-jackets-(fort-mill,sc)/football.htm" 
+                    width="100%" 
+                    height="400" 
+                    frameborder="0"
+                    style="border-radius: 10px;">
+                </iframe>
+            </div>
+            
+            <!-- York High School -->
+            <div class="maxpreps-widget">
+                <h4 style="color: #ff8c42; text-align: center; margin-bottom: 1rem;">York Cougars</h4>
+                <iframe 
+                    src="https://www.maxpreps.com/high-schools/york-cougars-(york,sc)/football.htm" 
+                    width="100%" 
+                    height="400" 
+                    frameborder="0"
+                    style="border-radius: 10px;">
+                </iframe>
+            </div>
+            
+            <!-- Catawba Ridge High School -->
+            <div class="maxpreps-widget">
+                <h4 style="color: #ff8c42; text-align: center; margin-bottom: 1rem;">Catawba Ridge Copperheads</h4>
+                <iframe 
+                    src="https://www.maxpreps.com/high-schools/catawba-ridge-copperheads-(fort-mill,sc)/football.htm" 
+                    width="100%" 
+                    height="400" 
+                    frameborder="0"
+                    style="border-radius: 10px;">
+                </iframe>
+            </div>
+            
+            <!-- Nation Ford High School -->
+            <div class="maxpreps-widget">
+                <h4 style="color: #ff8c42; text-align: center; margin-bottom: 1rem;">Nation Ford Falcons</h4>
+                <iframe 
+                    src="https://www.maxpreps.com/high-schools/nation-ford-falcons-(fort-mill,sc)/football.htm" 
+                    width="100%" 
+                    height="400" 
+                    frameborder="0"
+                    style="border-radius: 10px;">
+                </iframe>
+            </div>
+            
+            <!-- Lancaster High School -->
+            <div class="maxpreps-widget">
+                <h4 style="color: #ff8c42; text-align: center; margin-bottom: 1rem;">Lancaster Bruins</h4>
+                <iframe 
+                    src="https://www.maxpreps.com/high-schools/lancaster-bruins-(lancaster,sc)/football.htm" 
+                    width="100%" 
+                    height="400" 
+                    frameborder="0"
+                    style="border-radius: 10px;">
+                </iframe>
+            </div>
+            
+            <!-- Clover High School -->
+            <div class="maxpreps-widget">
+                <h4 style="color: #ff8c42; text-align: center; margin-bottom: 1rem;">Clover Blue Eagles</h4>
+                <iframe 
+                    src="https://www.maxpreps.com/high-schools/clover-blue-eagles-(clover,sc)/football.htm" 
+                    width="100%" 
+                    height="400" 
+                    frameborder="0"
+                    style="border-radius: 10px;">
+                </iframe>
+            </div>
+            
+            <!-- Andrew Jackson High School -->
+            <div class="maxpreps-widget">
+                <h4 style="color: #ff8c42; text-align: center; margin-bottom: 1rem;">Andrew Jackson Volunteers</h4>
+                <iframe 
+                    src="https://www.maxpreps.com/high-schools/andrew-jackson-volunteers-(kershaw,sc)/football.htm" 
+                    width="100%" 
+                    height="400" 
+                    frameborder="0"
+                    style="border-radius: 10px;">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Manual Score Cards (Your Custom Updates) -->
+        <h3 style="text-align: center; color: #333; margin: 3rem 0 2rem 0;">Featured Game Highlights</h3>
         <div class="scores-grid">
             <div class="score-card">
                 <div class="teams">Panthers vs Eagles</div>
@@ -1115,7 +1229,7 @@
             </div>
             <div class="counter-stat">
                 <span class="counter-icon">🏫</span>
-                <span class="counter-number">12</span>
+                <span class="counter-number">9</span>
                 <span class="counter-label">Schools Covered</span>
             </div>
             <div class="counter-stat">
@@ -1127,6 +1241,57 @@
     </section>
 
     <script>
+        // Site visit counter functionality
+        function initializeCounters() {
+            // Check if localStorage is supported
+            try {
+                // Get or create visitor count using memory storage for now
+                let visitorCount = 1247;
+                let articlesRead = 3891;
+                let todayVisits = 89;
+                
+                // Simple increment for demo (in real site would use proper analytics)
+                visitorCount += Math.floor(Math.random() * 10) + 1;
+                todayVisits += Math.floor(Math.random() * 5) + 1;
+                
+                // Update display with animation
+                animateCounter('visitorCount', visitorCount);
+                animateCounter('articlesRead', articlesRead);
+                animateCounter('todayVisits', todayVisits);
+            } catch (e) {
+                // Fallback if localStorage not available
+                console.log('Using default counter values');
+            }
+        }
+        
+        function animateCounter(elementId, finalValue) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            const startValue = parseInt(element.textContent.replace(/,/g, ''));
+            const increment = Math.ceil((finalValue - startValue) / 30);
+            let currentValue = startValue;
+            
+            const timer = setInterval(() => {
+                currentValue += increment;
+                if (currentValue >= finalValue) {
+                    currentValue = finalValue;
+                    clearInterval(timer);
+                }
+                element.textContent = currentValue.toLocaleString();
+            }, 50);
+        }
+        
+        // Track article clicks
+        function trackArticleView() {
+            // In a real implementation, this would update a database
+            let articlesRead = document.getElementById('articlesRead');
+            if (articlesRead) {
+                let current = parseInt(articlesRead.textContent.replace(/,/g, ''));
+                articlesRead.textContent = (current + 1).toLocaleString();
+            }
+        }
+
         // Hero image rotation with your actual sports photos
         let currentHeroImage = 0;
         const heroImages = document.querySelectorAll('.hero-image');
@@ -1227,65 +1392,6 @@
                 nav.style.background = 'rgba(0,0,0,0.9)';
             }
         });
-        
-        // Site visit counter functionality
-        function initializeCounters() {
-            // Get or create visitor count
-            let visitorCount = localStorage.getItem('gameday-visitors') || 1247;
-            let articlesRead = localStorage.getItem('gameday-articles') || 3891;
-            let todayVisits = localStorage.getItem('gameday-today-visits') || 89;
-            let lastVisitDate = localStorage.getItem('gameday-last-visit');
-            
-            // Get today's date
-            const today = new Date().toDateString();
-            
-            // Check if it's a new day
-            if (lastVisitDate !== today) {
-                // Reset today's counter for new day
-                todayVisits = 1;
-                localStorage.setItem('gameday-today-visits', todayVisits);
-                localStorage.setItem('gameday-last-visit', today);
-            } else {
-                // Increment today's visits
-                todayVisits = parseInt(todayVisits) + 1;
-                localStorage.setItem('gameday-today-visits', todayVisits);
-            }
-            
-            // Increment total visitor count
-            visitorCount = parseInt(visitorCount) + 1;
-            localStorage.setItem('gameday-visitors', visitorCount);
-            
-            // Update display with animation
-            animateCounter('visitorCount', visitorCount);
-            animateCounter('articlesRead', articlesRead);
-            animateCounter('todayVisits', todayVisits);
-        }
-        
-        function animateCounter(elementId, finalValue) {
-            const element = document.getElementById(elementId);
-            const startValue = parseInt(element.textContent.replace(/,/g, ''));
-            const increment = Math.ceil((finalValue - startValue) / 30);
-            let currentValue = startValue;
-            
-            const timer = setInterval(() => {
-                currentValue += increment;
-                if (currentValue >= finalValue) {
-                    currentValue = finalValue;
-                    clearInterval(timer);
-                }
-                element.textContent = currentValue.toLocaleString();
-            }, 50);
-        }
-        
-        // Track article clicks
-        function trackArticleView() {
-            let articlesRead = localStorage.getItem('gameday-articles') || 3891;
-            articlesRead = parseInt(articlesRead) + 1;
-            localStorage.setItem('gameday-articles', articlesRead);
-            
-            // Update counter display
-            document.getElementById('articlesRead').textContent = parseInt(articlesRead).toLocaleString();
-        }
         
         // Add loading animations
         const observerOptions = {
