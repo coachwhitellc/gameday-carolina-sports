@@ -277,10 +277,183 @@
             margin: 1rem 0;
         }
 
+        /* Feature Articles Section - Spotlight */
+        .spotlight {
+            background: linear-gradient(
+                135deg,
+                rgba(0,0,0,0.8) 0%,
+                rgba(0,0,0,0.6) 50%,
+                rgba(0,0,0,0.8) 100%
+            ),
+            url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="grass" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect fill="%23228B22" width="20" height="20"/><rect fill="%2332CD32" width="10" height="20"/></pattern></defs><rect fill="url(%23grass)" width="1200" height="800"/><g stroke="%23fff" stroke-width="3" fill="none"><line x1="0" y1="100" x2="1200" y2="100"/><line x1="0" y1="200" x2="1200" y2="200"/><line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="400" x2="1200" y2="400"/><line x1="0" y1="500" x2="1200" y2="500"/><line x1="0" y1="600" x2="1200" y2="600"/><line x1="0" y1="700" x2="1200" y2="700"/></g><circle fill="%23FFD700" cx="100" cy="50" r="25" opacity="0.9"/><circle fill="%23FFD700" cx="300" cy="60" r="20" opacity="0.8"/><circle fill="%23FFD700" cx="500" cy="45" r="30" opacity="0.9"/><circle fill="%23FFD700" cx="700" cy="55" r="25" opacity="0.7"/><circle fill="%23FFD700" cx="900" cy="40" r="35" opacity="0.9"/><circle fill="%23FFD700" cx="1100" cy="50" r="20" opacity="0.8"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spotlight::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3));
+        }
+
+        .spotlight::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, transparent, rgba(0,0,0,0.3));
+        }
+
+        .spotlight-title {
+            font-size: 4rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #fff;
+            text-transform: uppercase;
+            position: relative;
+            text-shadow: 0 0 20px rgba(255,215,0,0.8), 0 0 40px rgba(255,215,0,0.4);
+            animation: spotlightGlow 3s ease-in-out infinite alternate;
+        }
+
+        .spotlight-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 6px;
+            background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
+            box-shadow: 0 0 15px rgba(255,215,0,0.6);
+            animation: titleUnderlineGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes spotlightGlow {
+            0% { 
+                text-shadow: 0 0 20px rgba(255,215,0,0.8), 0 0 40px rgba(255,215,0,0.4);
+                transform: scale(1);
+            }
+            100% { 
+                text-shadow: 0 0 30px rgba(255,215,0,1), 0 0 60px rgba(255,215,0,0.6), 0 0 80px rgba(255,215,0,0.3);
+                transform: scale(1.02);
+            }
+        }
+
+        @keyframes titleUnderlineGlow {
+            0% { 
+                box-shadow: 0 0 15px rgba(255,215,0,0.6);
+                width: 150px;
+            }
+            100% { 
+                box-shadow: 0 0 25px rgba(255,215,0,0.9), 0 0 35px rgba(255,215,0,0.5);
+                width: 180px;
+            }
+        }
+
+        /* Stadium Light Effects */
+        .stadium-lights {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .light-beam {
+            position: absolute;
+            width: 200px;
+            height: 300px;
+            background: radial-gradient(ellipse at center top, 
+                rgba(255,255,255,0.3) 0%, 
+                rgba(255,255,255,0.1) 30%, 
+                rgba(255,255,255,0.05) 60%, 
+                transparent 100%);
+            animation: lightFlicker 4s ease-in-out infinite;
+        }
+
+        .light-beam:nth-child(1) {
+            left: 10%;
+            top: -50px;
+            animation-delay: 0s;
+        }
+
+        .light-beam:nth-child(2) {
+            left: 30%;
+            top: -30px;
+            animation-delay: 1s;
+        }
+
+        .light-beam:nth-child(3) {
+            right: 30%;
+            top: -40px;
+            animation-delay: 2s;
+        }
+
+        .light-beam:nth-child(4) {
+            right: 10%;
+            top: -20px;
+            animation-delay: 3s;
+        }
+
+        @keyframes lightFlicker {
+            0%, 100% { opacity: 0.8; }
+            20% { opacity: 1; }
+            40% { opacity: 0.7; }
+            60% { opacity: 0.9; }
+            80% { opacity: 0.6; }
+        }
+
+        /* Enhanced Article Cards for Spotlight */
+        .spotlight .article-card {
+            background: rgba(255,255,255,0.95);
+            border: 2px solid rgba(255,215,0,0.3);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4), 0 0 20px rgba(255,215,0,0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        .spotlight .article-card:hover {
+            transform: scale(1.08) translateY(-15px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6), 0 0 30px rgba(255,215,0,0.4);
+            border-color: rgba(255,215,0,0.6);
+        }
+
+        .spotlight .article-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                rgba(255,215,0,0.5), 
+                rgba(255,165,0,0.5), 
+                rgba(255,215,0,0.5));
+            border-radius: 22px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
         /* Feature Articles Carousel */
         .articles-carousel {
             position: relative;
             margin: 3rem 0;
+            z-index: 10;
         }
 
         .carousel-container {
@@ -594,6 +767,59 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Site Counter Styling */
+        .site-counter {
+            background: linear-gradient(135deg, 
+                rgba(255,140,66,0.1) 0%, 
+                rgba(255,167,38,0.1) 100%);
+            padding: 2rem;
+            text-align: center;
+            border-top: 2px solid rgba(255,140,66,0.3);
+        }
+
+        .counter-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .counter-stat {
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 8px 25px rgba(255,140,66,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .counter-stat:hover {
+            transform: translateY(-5px);
+        }
+
+        .counter-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #ff8c42;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .counter-label {
+            font-size: 1rem;
+            color: #666;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .counter-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
         .upload-subtext {
             color: #666;
             font-size: 0.9rem;
@@ -625,10 +851,10 @@
         <div class="hero-carousel">
             <div class="hero-image" style="background-image: url('IL Football.jpg')"></div>
             <div class="hero-image" style="background-image: url('Catawba Ridge baseball.jpg')"></div>
-            <div class="hero-image" style="background-image: url('CR vB.jpg')"></div>
             <div class="hero-image" style="background-image: url('IL VB.webp')"></div>
             <div class="hero-image" style="background-image: url('IL football enter.jpg')"></div>
             <div class="hero-image" style="background-image: url('Jameson Terrell.jpg')"></div>
+            <div class="hero-image" style="background-image: url('CR vB.jpg')"></div>
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -667,9 +893,15 @@
         </div>
     </section>
 
-    <!-- Feature Articles Section -->
-    <section id="articles" class="section">
-        <h2 class="section-title">Feature Stories</h2>
+    <!-- Spotlight Section -->
+    <section id="articles" class="section spotlight">
+        <div class="stadium-lights">
+            <div class="light-beam"></div>
+            <div class="light-beam"></div>
+            <div class="light-beam"></div>
+            <div class="light-beam"></div>
+        </div>
+        <h2 class="spotlight-title">Spotlight</h2>
         <div class="articles-carousel">
             <div class="carousel-container" id="articlesCarousel">
                 <div class="article-card" onclick="openArticle('quarterback-star')">
@@ -830,6 +1062,32 @@
         </div>
     </section>
 
+    <!-- Site Counter Section -->
+    <section class="site-counter">
+        <div class="counter-container">
+            <div class="counter-stat">
+                <span class="counter-icon">👥</span>
+                <span class="counter-number" id="visitorCount">1,247</span>
+                <span class="counter-label">Total Visitors</span>
+            </div>
+            <div class="counter-stat">
+                <span class="counter-icon">📖</span>
+                <span class="counter-number" id="articlesRead">3,891</span>
+                <span class="counter-label">Articles Read</span>
+            </div>
+            <div class="counter-stat">
+                <span class="counter-icon">🏫</span>
+                <span class="counter-number">12</span>
+                <span class="counter-label">Schools Covered</span>
+            </div>
+            <div class="counter-stat">
+                <span class="counter-icon">⭐</span>
+                <span class="counter-number" id="todayVisits">89</span>
+                <span class="counter-label">Today's Visits</span>
+            </div>
+        </div>
+    </section>
+
     <script>
         // Hero image rotation with your actual sports photos
         let currentHeroImage = 0;
@@ -837,10 +1095,10 @@
         const sportsScenes = [
             'IL Football Action',
             'Catawba Ridge Baseball', 
-            'CR Volleyball',
             'IL Volleyball',
             'Football Team Entrance',
-            'Jameson Terrell Feature'
+            'Player Feature - Jameson Terrell',
+            'CR Volleyball'
         ];
         
         function rotateHeroImages() {
@@ -852,7 +1110,7 @@
             console.log('Now showing:', sportsScenes[currentHeroImage]);
         }
         
-        // Start hero rotation with your actual photos
+        // Start hero rotation with longer intervals for sports scenes
         heroImages[0].classList.add('active');
         setInterval(rotateHeroImages, 6000); // 6 seconds per image
         
@@ -886,8 +1144,9 @@
         // Auto-rotate articles
         setInterval(nextArticle, 5000);
         
-        // Article click handlers
+        // Article click handlers with tracking
         function openArticle(articleId) {
+            trackArticleView(); // Track the article view
             alert(`Opening article: ${articleId}\n\nThis would take you to the full article page!`);
         }
         
@@ -931,6 +1190,65 @@
             }
         });
         
+        // Site visit counter functionality
+        function initializeCounters() {
+            // Get or create visitor count
+            let visitorCount = localStorage.getItem('gameday-visitors') || 1247;
+            let articlesRead = localStorage.getItem('gameday-articles') || 3891;
+            let todayVisits = localStorage.getItem('gameday-today-visits') || 89;
+            let lastVisitDate = localStorage.getItem('gameday-last-visit');
+            
+            // Get today's date
+            const today = new Date().toDateString();
+            
+            // Check if it's a new day
+            if (lastVisitDate !== today) {
+                // Reset today's counter for new day
+                todayVisits = 1;
+                localStorage.setItem('gameday-today-visits', todayVisits);
+                localStorage.setItem('gameday-last-visit', today);
+            } else {
+                // Increment today's visits
+                todayVisits = parseInt(todayVisits) + 1;
+                localStorage.setItem('gameday-today-visits', todayVisits);
+            }
+            
+            // Increment total visitor count
+            visitorCount = parseInt(visitorCount) + 1;
+            localStorage.setItem('gameday-visitors', visitorCount);
+            
+            // Update display with animation
+            animateCounter('visitorCount', visitorCount);
+            animateCounter('articlesRead', articlesRead);
+            animateCounter('todayVisits', todayVisits);
+        }
+        
+        function animateCounter(elementId, finalValue) {
+            const element = document.getElementById(elementId);
+            const startValue = parseInt(element.textContent.replace(/,/g, ''));
+            const increment = Math.ceil((finalValue - startValue) / 30);
+            let currentValue = startValue;
+            
+            const timer = setInterval(() => {
+                currentValue += increment;
+                if (currentValue >= finalValue) {
+                    currentValue = finalValue;
+                    clearInterval(timer);
+                }
+                element.textContent = currentValue.toLocaleString();
+            }, 50);
+        }
+        
+        // Track article clicks
+        function trackArticleView() {
+            let articlesRead = localStorage.getItem('gameday-articles') || 3891;
+            articlesRead = parseInt(articlesRead) + 1;
+            localStorage.setItem('gameday-articles', articlesRead);
+            
+            // Update counter display
+            document.getElementById('articlesRead').textContent = parseInt(articlesRead).toLocaleString();
+        }
+        
         // Add loading animations
         const observerOptions = {
             threshold: 0.1,
@@ -953,6 +1271,9 @@
             card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(card);
         });
+        
+        // Initialize counters when page loads
+        document.addEventListener('DOMContentLoaded', initializeCounters);
     </script>
 </body>
 </html>
