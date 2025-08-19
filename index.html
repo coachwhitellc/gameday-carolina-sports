@@ -16,6 +16,13 @@
             line-height: 1.6;
             color: #333;
             overflow-x: hidden;
+            background: linear-gradient(180deg, 
+                #fef7e6 0%, 
+                #fdf4e0 25%, 
+                #fcf1da 50%, 
+                #fbeedd 75%, 
+                #faece0 100%);
+            min-height: 100vh;
         }
 
         /* Hero Section */
@@ -34,9 +41,18 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, #ff6b35, #f7931e, #1e90ff, #32cd32);
+            background: linear-gradient(135deg, #ff8c42, #ffa726, #ffb74d, #ffcc80);
             background-size: 400% 400%;
             animation: gradientShift 8s ease infinite;
+        }
+
+        .hero-carousel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
 
         .hero-image {
@@ -48,11 +64,21 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            transition: opacity 2s ease-in-out;
+            transition: opacity 3s ease-in-out;
+            transform: scale(1.1);
+            animation: kenBurns 15s ease-in-out infinite;
         }
 
         .hero-image.active {
-            opacity: 0.7;
+            opacity: 0.8;
+        }
+
+        @keyframes kenBurns {
+            0% { transform: scale(1.1) translate(0, 0); }
+            25% { transform: scale(1.15) translate(-2%, 1%); }
+            50% { transform: scale(1.1) translate(2%, -1%); }
+            75% { transform: scale(1.13) translate(-1%, 2%); }
+            100% { transform: scale(1.1) translate(0, 0); }
         }
 
         .hero-overlay {
@@ -61,7 +87,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(255,107,53,0.3));
+            background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(255,140,66,0.3));
+            z-index: 5;
         }
 
         .hero-content {
@@ -88,6 +115,16 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
+        .hero-logo {
+            margin-bottom: 2rem;
+        }
+
+        .hero-logo img {
+            height: 120px;
+            width: auto;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
+        }
+
         /* Navigation */
         .nav {
             position: fixed;
@@ -110,6 +147,17 @@
         }
 
         .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-logo-text {
             font-size: 1.5rem;
             font-weight: 900;
             color: #ff6b35;
@@ -137,6 +185,7 @@
             padding: 4rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
+            background: transparent;
         }
 
         .section-title {
@@ -157,15 +206,39 @@
             transform: translateX(-50%);
             width: 100px;
             height: 4px;
-            background: linear-gradient(90deg, #ff6b35, #f7931e);
+            background: linear-gradient(90deg, #ff8c42, #ffa726);
         }
 
         /* Scores Section */
         .scores {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
+            background: linear-gradient(135deg, 
+                rgba(255,140,66,0.15) 0%, 
+                rgba(255,167,38,0.15) 50%, 
+                rgba(255,183,77,0.15) 100%);
+            color: #333;
             padding: 4rem 2rem;
-            margin: 2rem 0;
+            margin: 0;
+            position: relative;
+        }
+
+        .scores::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(255,140,66,0.1));
+        }
+
+        .scores::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, transparent, rgba(255,140,66,0.1));
         }
 
         .scores-grid {
@@ -177,12 +250,14 @@
         }
 
         .score-card {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.8);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 2rem;
             text-align: center;
             transition: transform 0.3s ease;
+            border: 1px solid rgba(255,167,38,0.3);
+            box-shadow: 0 8px 25px rgba(255,140,66,0.15);
         }
 
         .score-card:hover {
@@ -198,7 +273,7 @@
         .score {
             font-size: 2.5rem;
             font-weight: 900;
-            color: #ff6b35;
+            color: #ff8c42;
             margin: 1rem 0;
         }
 
@@ -231,7 +306,7 @@
         .article-image {
             width: 100%;
             height: 200px;
-            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            background: linear-gradient(45deg, #ff8c42, #ffa726);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -262,7 +337,7 @@
         }
 
         .carousel-btn {
-            background: #ff6b35;
+            background: #ff8c42;
             color: white;
             border: none;
             padding: 12px 24px;
@@ -274,14 +349,28 @@
         }
 
         .carousel-btn:hover {
-            background: #e55a2b;
+            background: #ff7043;
         }
 
         /* Sponsors Section */
         .sponsors {
-            background: #f8f9fa;
+            background: linear-gradient(135deg, 
+                rgba(255,183,77,0.1) 0%, 
+                rgba(255,204,128,0.1) 50%, 
+                rgba(255,224,178,0.1) 100%);
             padding: 4rem 2rem;
             text-align: center;
+            position: relative;
+        }
+
+        .sponsors::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(255,183,77,0.05));
         }
 
         .sponsors-grid {
@@ -307,7 +396,7 @@
         .sponsor-logo {
             width: 100%;
             height: 80px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, #ffb74d, #ffa726);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -320,8 +409,32 @@
         /* Fits Section */
         .fits {
             padding: 4rem 2rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            background: linear-gradient(135deg, 
+                rgba(255,167,38,0.15) 0%, 
+                rgba(255,140,66,0.15) 50%, 
+                rgba(255,112,67,0.15) 100%);
+            color: #333;
+            position: relative;
+        }
+
+        .fits::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(255,167,38,0.1));
+        }
+
+        .fits::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, transparent, rgba(255,167,38,0.1));
         }
 
         .fits-grid {
@@ -348,12 +461,13 @@
         .fit-image {
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            background: linear-gradient(45deg, #ff8c42, #ffa726);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.1rem;
             font-weight: bold;
+            color: white;
         }
 
         /* High Schools Section */
@@ -379,7 +493,7 @@
         }
 
         .school-header {
-            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            background: linear-gradient(45deg, #ff8c42, #ffa726);
             color: white;
             padding: 2rem;
             text-align: center;
@@ -413,7 +527,7 @@
         .stat-number {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #ff6b35;
+            color: #ff8c42;
         }
 
         .stat-label {
@@ -459,24 +573,24 @@
 
         /* Upload Area */
         .upload-area {
-            border: 3px dashed #ff6b35;
+            border: 3px dashed #ff8c42;
             border-radius: 15px;
             padding: 2rem;
             text-align: center;
             margin: 2rem 0;
-            background: rgba(255,107,53,0.1);
+            background: rgba(255,140,66,0.1);
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .upload-area:hover {
-            background: rgba(255,107,53,0.2);
-            border-color: #e55a2b;
+            background: rgba(255,140,66,0.2);
+            border-color: #ff7043;
         }
 
         .upload-text {
             font-weight: bold;
-            color: #ff6b35;
+            color: #ff8c42;
             margin-bottom: 0.5rem;
         }
 
@@ -490,7 +604,10 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
-            <div class="nav-logo">GameDay Carolina</div>
+            <div class="nav-logo">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='gold' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FFD700'/%3E%3Cstop offset='100%25' style='stop-color:%23B8860B'/%3E%3C/linearGradient%3E%3ClinearGradient id='silver' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23E8E8E8'/%3E%3Cstop offset='100%25' style='stop-color:%23A8A8A8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M30 40 L170 40 Q180 40 180 50 L180 120 Q180 130 175 135 L100 180 L25 135 Q20 130 20 120 L20 50 Q20 40 30 40 Z' fill='url(%23silver)' stroke='%23888' stroke-width='2'/%3E%3Cpath d='M35 50 L165 50 Q170 50 170 55 L170 115 Q170 120 167 123 L100 165 L33 123 Q30 120 30 115 L30 55 Q30 50 35 50 Z' fill='url(%23gold)'/%3E%3Ctext x='100' y='75' text-anchor='middle' fill='%23888' font-size='24' font-weight='bold' font-family='Arial'%3EGAMEDAY%3C/text%3E%3Cpolygon points='100,85 105,95 115,95 107,103 110,113 100,107 90,113 93,103 85,95 95,95' fill='%23888'/%3E%3Ctext x='100' y='140' text-anchor='middle' fill='%23888' font-size='20' font-weight='bold' font-family='Arial'%3ECAROLINA%3C/text%3E%3C/svg%3E" alt="GameDay Carolina Logo">
+                <span class="nav-logo-text">GameDay Carolina</span>
+            </div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#scores">Scores</a></li>
@@ -505,11 +622,19 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-bg"></div>
-        <div class="hero-image" style="background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 800 600\"><rect fill=\"%23ff6b35\" width=\"800\" height=\"600\"/><circle fill=\"%23fff\" cx=\"400\" cy=\"300\" r=\"100\"/><text x=\"400\" y=\"320\" text-anchor=\"middle\" fill=\"%23ff6b35\" font-size=\"48\" font-weight=\"bold\">SPORTS</text></svg>')"></div>
-        <div class="hero-image" style="background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 800 600\"><rect fill=\"%231e90ff\" width=\"800\" height=\"600\"/><polygon fill=\"%23fff\" points=\"350,200 450,200 480,300 420,380 380,380 320,300\"/><text x=\"400\" y=\"320\" text-anchor=\"middle\" fill=\"%231e90ff\" font-size=\"32\" font-weight=\"bold\">GAME</text></svg>')"></div>
-        <div class="hero-image" style="background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 800 600\"><rect fill=\"%2332cd32\" width=\"800\" height=\"600\"/><rect fill=\"%23fff\" x=\"200\" y=\"200\" width=\"400\" height=\"200\" rx=\"20\"/><text x=\"400\" y=\"320\" text-anchor=\"middle\" fill=\"%2332cd32\" font-size=\"36\" font-weight=\"bold\">CAROLINA</text></svg>')"></div>
+        <div class="hero-carousel">
+            <div class="hero-image" style="background-image: url('IL Football.jpg')"></div>
+            <div class="hero-image" style="background-image: url('Catawba Ridge baseball.jpg')"></div>
+            <div class="hero-image" style="background-image: url('CR vB.jpg')"></div>
+            <div class="hero-image" style="background-image: url('IL VB.webp')"></div>
+            <div class="hero-image" style="background-image: url('IL football enter.jpg')"></div>
+            <div class="hero-image" style="background-image: url('Jameson Terrell.jpg')"></div>
+        </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
+            <div class="hero-logo">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cdefs%3E%3ClinearGradient id='gold' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FFD700'/%3E%3Cstop offset='50%25' style='stop-color:%23FFA500'/%3E%3Cstop offset='100%25' style='stop-color:%23B8860B'/%3E%3C/linearGradient%3E%3ClinearGradient id='silver' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23F5F5F5'/%3E%3Cstop offset='50%25' style='stop-color:%23E0E0E0'/%3E%3Cstop offset='100%25' style='stop-color:%23C0C0C0'/%3E%3C/linearGradient%3E%3Cfilter id='shadow'%3E%3CfeDropShadow dx='2' dy='4' stdDeviation='3' flood-color='%23000' flood-opacity='0.3'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M50 60 L250 60 Q270 60 270 80 L270 180 Q270 200 260 210 L150 270 L40 210 Q30 200 30 180 L30 80 Q30 60 50 60 Z' fill='url(%23silver)' stroke='%23999' stroke-width='3' filter='url(%23shadow)'/%3E%3Cpath d='M60 80 L240 80 Q250 80 250 90 L250 170 Q250 180 245 185 L150 240 L55 185 Q50 180 50 170 L50 90 Q50 80 60 80 Z' fill='url(%23gold)'/%3E%3Ctext x='150' y='115' text-anchor='middle' fill='%23666' font-size='32' font-weight='bold' font-family='Arial, sans-serif'%3EGAMEDAY%3C/text%3E%3Cpolygon points='150,125 158,140 175,140 162,150 167,167 150,157 133,167 138,150 125,140 142,140' fill='%23666'/%3E%3Ctext x='150' y='200' text-anchor='middle' fill='%23666' font-size='26' font-weight='bold' font-family='Arial, sans-serif'%3ECAROLINA%3C/text%3E%3C/svg%3E" alt="GameDay Carolina Logo">
+            </div>
             <h1 class="hero-title">GameDay Carolina</h1>
             <p class="hero-subtitle">Your Home for Local Sports Action!</p>
         </div>
@@ -517,7 +642,7 @@
 
     <!-- Scores Section -->
     <section id="scores" class="scores">
-        <h2 class="section-title" style="color: white;">Latest Scores</h2>
+            <h2 class="section-title" style="color: #333;">Latest Scores</h2>
         <div class="scores-grid">
             <div class="score-card">
                 <div class="teams">Panthers vs Eagles</div>
@@ -585,7 +710,7 @@
 
     <!-- Fits Section -->
     <section id="fits" class="fits">
-        <h2 class="section-title" style="color: white;">Fits of the Week</h2>
+        <h2 class="section-title" style="color: #333;">Fits of the Week</h2>
         <div class="upload-area" onclick="uploadFit()">
             <div class="upload-text">📸 Upload Your Game Day Fit!</div>
             <div class="upload-subtext">Show off your team spirit with style</div>
@@ -706,19 +831,30 @@
     </section>
 
     <script>
-        // Hero image rotation
+        // Hero image rotation with your actual sports photos
         let currentHeroImage = 0;
         const heroImages = document.querySelectorAll('.hero-image');
+        const sportsScenes = [
+            'IL Football Action',
+            'Catawba Ridge Baseball', 
+            'CR Volleyball',
+            'IL Volleyball',
+            'Football Team Entrance',
+            'Jameson Terrell Feature'
+        ];
         
         function rotateHeroImages() {
             heroImages[currentHeroImage].classList.remove('active');
             currentHeroImage = (currentHeroImage + 1) % heroImages.length;
             heroImages[currentHeroImage].classList.add('active');
+            
+            // Optional: Log current scene for debugging
+            console.log('Now showing:', sportsScenes[currentHeroImage]);
         }
         
-        // Start hero rotation
+        // Start hero rotation with your actual photos
         heroImages[0].classList.add('active');
-        setInterval(rotateHeroImages, 4000);
+        setInterval(rotateHeroImages, 6000); // 6 seconds per image
         
         // Articles carousel
         let currentArticleIndex = 0;
