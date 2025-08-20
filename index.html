@@ -1573,7 +1573,7 @@
     <section id="home" class="hero">
         <div class="hero-bg"></div>
         <div class="hero-carousel">
-            <div class="hero-image active" style="background-image: url('IL Football.jpg')"></div>
+            <div class="hero-image" style="background-image: url('IL Football.jpg')"></div>
             <div class="hero-image" style="background-image: url('Catawba Ridge baseball.jpg')"></div>
             <div class="hero-image" style="background-image: url('IL VB.webp')"></div>
             <div class="hero-image" style="background-image: url('IL football enter.jpg')"></div>
@@ -2075,34 +2075,55 @@
             }
         }
 
-        // Hero image rotation with your actual sports photos
-        let currentHeroImage = 0;
-        const heroImages = document.querySelectorAll('.hero-image');
-        const sportsScenes = [
-            'IL Football Action',
-            'Catawba Ridge Baseball', 
-            'IL Volleyball',
-            'Football Team Entrance',
-            'Player Feature - Jameson Terrell',
-            'CR Volleyball'
-        ];
-        
-        function rotateHeroImages() {
-            if (heroImages.length === 0) return;
+        // Hero image rotation with your actual sports photos - FIXED
+        function initializeHeroCarousel() {
+            const heroImages = document.querySelectorAll('.hero-image');
+            let currentHeroImage = 0;
             
-            heroImages[currentHeroImage].classList.remove('active');
-            currentHeroImage = (currentHeroImage + 1) % heroImages.length;
-            heroImages[currentHeroImage].classList.add('active');
+            const sportsScenes = [
+                'IL Football Action',
+                'Catawba Ridge Baseball', 
+                'IL Volleyball',
+                'Football Team Entrance',
+                'Player Feature - Jameson Terrell',
+                'CR Volleyball'
+            ];
             
-            // Optional: Log current scene for debugging
-            console.log('Now showing:', sportsScenes[currentHeroImage]);
+            console.log('Found', heroImages.length, 'hero images');
+            
+            function rotateHeroImages() {
+                if (heroImages.length === 0) {
+                    console.log('No hero images found');
+                    return;
+                }
+                
+                // Remove active class from current image
+                heroImages[currentHeroImage].classList.remove('active');
+                
+                // Move to next image
+                currentHeroImage = (currentHeroImage + 1) % heroImages.length;
+                
+                // Add active class to new image
+                heroImages[currentHeroImage].classList.add('active');
+                
+                console.log('Now showing image', currentHeroImage + 1, ':', sportsScenes[currentHeroImage]);
+            }
+            
+            // Initialize first image
+            if (heroImages.length > 0) {
+                heroImages[0].classList.add('active');
+                console.log('Started with image 1:', sportsScenes[0]);
+                
+                // Start rotation every 4 seconds
+                setInterval(rotateHeroImages, 4000);
+            }
         }
         
-        // Start hero rotation with longer intervals for sports scenes
-        if (heroImages.length > 0) {
-            heroImages[0].classList.add('active');
-            setInterval(rotateHeroImages, 5000); // 5 seconds per image
-        }
+        // Initialize hero carousel when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing hero carousel...');
+            initializeHeroCarousel();
+        });
         
         // Articles carousel - Fixed functionality
         let currentArticleIndex = 0;
