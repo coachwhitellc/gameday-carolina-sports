@@ -1731,13 +1731,16 @@
         <h2 class="spotlight-title">Spotlight</h2>
         <div class="articles-carousel">
             <div class="carousel-container" id="articlesCarousel">
-                <div class="article-card" onclick="openArticle('quarterback-star')">
-                    <div class="article-image">Star QB Photo</div>
+                <!-- Jameson Terrell Article -->
+                <div class="article-card" onclick="openArticle('jameson-terrell-feature')">
+                    <div class="article-image" style="background-image: url('Jameson Terrell.jpg'); background-size: cover; background-position: center;"></div>
                     <div class="article-content">
-                        <h3 class="article-title">Rising Star Takes Charge</h3>
-                        <p class="article-excerpt">Local quarterback leads team to victory with amazing plays and team spirit.</p>
+                        <h3 class="article-title">Jameson Terrell: Rising Star</h3>
+                        <p class="article-excerpt">Local athlete making waves with record-breaking performances this season.</p>
                     </div>
                 </div>
+                
+                <!-- Championship Dreams -->
                 <div class="article-card" onclick="openArticle('championship-bound')">
                     <div class="article-image">Team Celebration</div>
                     <div class="article-content">
@@ -1745,6 +1748,8 @@
                         <p class="article-excerpt">Panthers are ready for the big game after weeks of hard practice.</p>
                     </div>
                 </div>
+                
+                <!-- Coach Spotlight -->
                 <div class="article-card" onclick="openArticle('coach-spotlight')">
                     <div class="article-image">Coach Profile</div>
                     <div class="article-content">
@@ -1752,6 +1757,8 @@
                         <p class="article-excerpt">Meet the coach who turned a losing team into champions this season.</p>
                     </div>
                 </div>
+                
+                <!-- Player Feature -->
                 <div class="article-card" onclick="openArticle('player-feature')">
                     <div class="article-image">Player Action</div>
                     <div class="article-content">
@@ -2090,21 +2097,36 @@
         heroImages[0].classList.add('active');
         setInterval(rotateHeroImages, 6000); // 6 seconds per image
         
-        // Articles carousel
+        // Articles carousel - Fixed functionality
         let currentArticleIndex = 0;
-        const articlesPerView = 3;
-        const articleCards = document.querySelectorAll('.article-card');
-        const totalArticles = articleCards.length;
+        const articlesPerView = window.innerWidth > 768 ? 3 : 1; // Show 3 on desktop, 1 on mobile
         
         function updateCarousel() {
             const carousel = document.getElementById('articlesCarousel');
-            const cardWidth = 350 + 32; // card width + gap
+            const articleCards = document.querySelectorAll('.article-card');
+            const totalArticles = articleCards.length;
+            
+            if (totalArticles === 0) return;
+            
+            const cardWidth = window.innerWidth > 768 ? 350 + 32 : window.innerWidth - 64; // card width + gap
             const translateX = -currentArticleIndex * cardWidth;
             carousel.style.transform = `translateX(${translateX}px)`;
+            
+            // Update button states
+            const prevBtn = document.querySelector('.carousel-btn');
+            const nextBtn = document.querySelectorAll('.carousel-btn')[1];
+            
+            if (prevBtn && nextBtn) {
+                prevBtn.style.opacity = currentArticleIndex === 0 ? '0.5' : '1';
+                nextBtn.style.opacity = currentArticleIndex >= totalArticles - articlesPerView ? '0.5' : '1';
+            }
         }
         
         function nextArticle() {
-            if (currentArticleIndex < totalArticles - articlesPerView) {
+            const totalArticles = document.querySelectorAll('.article-card').length;
+            const maxIndex = Math.max(0, totalArticles - articlesPerView);
+            
+            if (currentArticleIndex < maxIndex) {
                 currentArticleIndex++;
                 updateCarousel();
             }
@@ -2117,13 +2139,45 @@
             }
         }
         
-        // Auto-rotate articles
-        setInterval(nextArticle, 5000);
+        // Auto-rotate articles (optional)
+        setInterval(() => {
+            const totalArticles = document.querySelectorAll('.article-card').length;
+            const maxIndex = Math.max(0, totalArticles - articlesPerView);
+            
+            if (currentArticleIndex >= maxIndex) {
+                currentArticleIndex = 0;
+            } else {
+                currentArticleIndex++;
+            }
+            updateCarousel();
+        }, 8000); // 8 seconds per rotation
         
-        // Article click handlers with tracking
+        // Initialize carousel on page load
+        setTimeout(() => {
+            updateCarousel();
+        }, 100);
+        
+        // Article click handlers with real page navigation
         function openArticle(articleId) {
             trackArticleView(); // Track the article view
-            alert(`Opening article: ${articleId}\n\nThis would take you to the full article page!`);
+            
+            // Route to appropriate article pages
+            const articleRoutes = {
+                'jameson-terrell-feature': 'jameson-terrell-article.html',
+                'add-your-article': '#', // Replace with your article URL
+                'championship-bound': 'championship-article.html',
+                'coach-spotlight': 'coach-spotlight-article.html'
+            };
+            
+            const articleUrl = articleRoutes[articleId];
+            
+            if (articleUrl && articleUrl !== '#') {
+                // Open article in same window
+                window.location.href = articleUrl;
+            } else {
+                // Fallback for placeholder articles
+                alert(`Opening article: ${articleId}\n\nCreate ${articleId}.html file and upload to GitHub to make this article live!`);
+            }
         }
         
         // School feature handlers
