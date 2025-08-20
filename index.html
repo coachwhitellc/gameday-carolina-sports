@@ -148,12 +148,19 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            transition: opacity 3s ease-in-out;
+            transition: opacity 2s ease-in-out;
             transform: scale(1.1);
             animation: kenBurns 15s ease-in-out infinite;
+            z-index: 1;
         }
 
         .hero-image.active {
+            opacity: 0.8;
+            z-index: 2;
+        }
+
+        /* Force first image to be visible initially */
+        .hero-image:first-child {
             opacity: 0.8;
         }
 
@@ -2075,54 +2082,101 @@
             }
         }
 
-        // Hero image rotation with your actual sports photos - FIXED
-        function initializeHeroCarousel() {
+        // ENHANCED Hero image rotation - Multiple fixes
+        let heroCarouselActive = false;
+        let heroInterval = null;
+        
+        function startHeroCarousel() {
+            // Prevent multiple instances
+            if (heroCarouselActive) return;
+            heroCarouselActive = true;
+            
             const heroImages = document.querySelectorAll('.hero-image');
             let currentHeroImage = 0;
             
-            const sportsScenes = [
-                'IL Football Action',
-                'Catawba Ridge Baseball', 
-                'IL Volleyball',
-                'Football Team Entrance',
-                'Player Feature - Jameson Terrell',
-                'CR Volleyball'
-            ];
+            console.log('🏈 HERO CAROUSEL: Found', heroImages.length, 'images');
             
-            console.log('Found', heroImages.length, 'hero images');
+            if (heroImages.length === 0) {
+                console.log('❌ No hero images found!');
+                return;
+            }
             
-            function rotateHeroImages() {
-                if (heroImages.length === 0) {
-                    console.log('No hero images found');
-                    return;
-                }
+            // List all image URLs for debugging
+            heroImages.forEach((img, index) => {
+                const bgImage = img.style.backgroundImage;
+                console.log(`📸 Image ${index + 1}:`, bgImage);
+            });
+            
+            function rotateImages() {
+                console.log(`🔄 Rotating from image ${currentHeroImage + 1} to ${((currentHeroImage + 1) % heroImages.length) + 1}`);
                 
-                // Remove active class from current image
+                // Remove active from current
                 heroImages[currentHeroImage].classList.remove('active');
+                heroImages[currentHeroImage].style.opacity = '0';
                 
-                // Move to next image
+                // Move to next
                 currentHeroImage = (currentHeroImage + 1) % heroImages.length;
                 
-                // Add active class to new image
+                // Add active to new
                 heroImages[currentHeroImage].classList.add('active');
+                heroImages[currentHeroImage].style.opacity = '0.8';
                 
-                console.log('Now showing image', currentHeroImage + 1, ':', sportsScenes[currentHeroImage]);
+                console.log(`✅ Now showing image ${currentHeroImage + 1}`);
             }
             
             // Initialize first image
-            if (heroImages.length > 0) {
-                heroImages[0].classList.add('active');
-                console.log('Started with image 1:', sportsScenes[0]);
-                
-                // Start rotation every 4 seconds
-                setInterval(rotateHeroImages, 4000);
-            }
+            heroImages.forEach((img, index) => {
+                img.classList.remove('active');
+                img.style.opacity = '0';
+            });
+            
+            heroImages[0].classList.add('active');
+            heroImages[0].style.opacity = '0.8';
+            console.log('🎬 Started with first image');
+            
+            // Start rotation every 3 seconds (faster for testing)
+            heroInterval = setInterval(rotateImages, 3000);
+            console.log('⏰ Rotation started - every 3 seconds');
         }
         
-        // Initialize hero carousel when DOM is ready
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM loaded, initializing hero carousel...');
-            initializeHeroCarousel();
+        // Try multiple initialization methods
+        function initializeHeroCarousel() {
+            console.log('🚀 Initializing hero carousel...');
+            
+            // Method 1: Immediate
+            setTimeout(() => {
+                console.log('🔥 Attempt 1: Immediate start');
+                startHeroCarousel();
+            }, 100);
+            
+            // Method 2: After 1 second backup
+            setTimeout(() => {
+                if (!heroCarouselActive) {
+                    console.log('🔥 Attempt 2: Backup start after 1 second');
+                    startHeroCarousel();
+                }
+            }, 1000);
+            
+            // Method 3: After 3 seconds final backup
+            setTimeout(() => {
+                if (!heroCarouselActive) {
+                    console.log('🔥 Attempt 3: Final backup start after 3 seconds');
+                    startHeroCarousel();
+                }
+            }, 3000);
+        }
+        
+        // Initialize on DOM ready
+        document.addEventListener('DOMContentLoaded', initializeHeroCarousel);
+        
+        // Backup initialization on window load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                if (!heroCarouselActive) {
+                    console.log('🔥 Window load backup initialization');
+                    startHeroCarousel();
+                }
+            }, 500);
         });
         
         // Articles carousel - Fixed functionality
