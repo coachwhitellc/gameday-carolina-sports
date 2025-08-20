@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequel Patterson: Local Sports Star - GameDay Carolina</title>
+    <style>
+        :root {
+            --neon-green: #32FF32;
+            --electric-green: #00FF41;
+            --glow-green: #39FF14;
+            --warm-orange: #ff8c42;
+            --warm-gold: #ffa726;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, 
+                #FFD700 0%, #F4D03F 15%, #C0C0C0 35%, #E8E8E8 50%, 
+                #B8860B 65%, #A8A8A8 80%, #FFD700 100%);
+            background-size: 400% 400%;
+            animation: metallicFlow 12s ease-in-out infinite;
+            min-height: 100vh;
+        }
+
+        @keyframes metallicFlow {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+
+        /* Header Navigation */
+        .article-header {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .back-btn {
+            background: linear-gradient(45deg, var(--warm-orange), var(--neon-green));
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(50, 255, 50, 0.3);
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(50, 255, 50, 0.5);
+            text-decoration: none;
+            color: white;
+        }
+
+        .site-logo {
+            color: var(--neon-green);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+
+        /* Article Container */
+        .article-container {
+            max-width: 800px;
+            margin: 100px auto 50px auto;
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.95) 0%,
+                rgba(255, 215, 0, 0.1) 30%,
+                rgba(192, 192, 192, 0.1) 70%,
+                rgba(255, 255, 255, 0.9) 100%);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                0 20px 40px rgba(255, 215, 0, 0.2),
+                0 0 30px rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            overflow: hidden;
+        }
+
+        /* Hero Image */
+        .article-hero {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, var(--warm-orange), var(--neon-green));
+            background-image: url('sequel-patterson.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: end;
+            color: white;
+        }
+
+        .article-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.1) 0%,
+                rgba(0, 0, 0, 0.3) 60%,
+                rgba(0, 0, 0, 0.7) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            padding: 2rem;
+            width: 100%;
+        }
+
+        .article-category {
+            background: var(--neon-green);
+            color: black;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 15px rgba(50, 255, 50, 0.6);
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Article Content */
+        .article-content {
+            padding: 3rem;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--warm-orange), var(--neon-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .author-details h4 {
+            color: #333;
+            margin-bottom: 0.2rem;
+        }
+
+        .publish-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .article-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .article-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-text h3 {
+            color: var(--warm-orange);
+            margin: 2rem 0 1rem 0;
+            font-size: 1.4rem;
+        }
+
+        .highlight-quote {
+            background: linear-gradient(135deg, 
+                rgba(50, 255, 50, 0.1) 0%,
+                rgba(255, 215, 0, 0.1) 100%);
+            border-left: 4px solid var(--neon-green);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .highlight-quote::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--neon-green);
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            opacity: 0.3;
+        }
+
+        /* Stats Box */
+        .stats-box {
+            background: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.2) 0%,
+                rgba(50, 255, 50, 0.1) 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--warm-orange);
+            display: block;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        /* Share Buttons */
+        .share-section {
+            margin: 2rem 0;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(50, 255, 50, 0.1);
+            border-radius: 15px;
+        }
+
+        .share-title {
+            margin-bottom: 1rem;
+            color: var(--warm-orange);
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .share-btn.facebook { background: #3b5998; }
+        .share-btn.twitter { background: #1da1f2; }
+        .share-btn.instagram { background: #e4405f; }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            color: white;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .article-container {
+                margin: 80px 1rem 2rem 1rem;
+            }
+            
+            .article-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .article-hero {
+                height: 300px;
+            }
+            
+            .header-nav {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="article-header">
+        <nav class="header-nav">
+            <a href="index.html" class="back-btn">← Back to GameDay Carolina</a>
+            <div class="site-logo">GameDay Carolina</div>
+        </nav>
+    </header>
+
+    <!-- Article Container -->
+    <article class="article-container">
+        <!-- Hero Section -->
+        <div class="article-hero">
+            <div class="hero-content">
+                <span class="article-category">Student Athlete Spotlight</span>
+                <h1 class="article-title">The Making of Sequel Patterson</h1>
+                <p class="article-subtitle">A story of character, kindness, and athletic excellence</p>
+            </div>
+        </div>
+
+        <!-- Article Content -->
+        <div class="article-content">
+            <!-- Article Meta -->
+            <div class="article-meta">
+                <div class="author-info">
+                    <div class="author-avatar">GC</div>
+                    <div class="author-details">
+                        <h4>GameDay Carolina Staff</h4>
+                        <p class="publish-date">December 15, 2024</p>
+                    </div>
+                </div>
+                <div class="read-time">4 min read</div>
+            </div>
+
+            <!-- Article Text -->
+            <div class="article-text">
+                <p>Rodriguez Patterson likes to tell the story of when his son Sequel was just six years old, lying on the ground after being leveled in a youth football Super Bowl. While other kids stayed down, Sequel ran straight at him. He got flattened, stayed down for a moment, then looked up at his dad and said it didn't hurt. His Ravens team went on to win the title. For Rodriguez, that was the moment he knew: his son was different.</p>
+
+                <p>By the time Sequel arrived at Indian Land Middle School as an eighth grader, the word "different" didn't quite do him justice. On the court, he was dominant—so much so that he earned a spot on the varsity basketball team as a middle schooler, an almost unheard-of accomplishment.</p>
+
+                <h3>Standing Out on the Court</h3>
+
+                <p>His athletic director, Coach White, saw the qualities that set him apart immediately. "He wanted to dominate you between the lines," White said, "but he also wanted to dap you up after the game. That's rare."</p>
+
+                <div class="highlight-quote">
+                    "He wanted to dominate you between the lines, but he also wanted to dap you up after the game. That's rare."
+                    <br><strong>- Coach White, Athletic Director</strong>
+                </div>
+
+                <p>What truly made him stand out, though, wasn't just his athleticism or his competitive fire. It was his character. Sequel could have surrounded himself with the most popular group of students in school and offered him clout—but he didn't. Instead, he'd move tables in the cafeteria to sit with a student eating alone. His magnetism wasn't just about talent. It was about kindness.</p>
+
+                <h3>A Different Kind of Greatness</h3>
+
+                <p>Sequel Patterson isn't just another rising star. He's a reminder that greatness isn't defined by points scored or games won—it's defined by how you treat people when the lights dim and the crowd goes home.</p>
+
+                <!-- Stats Box -->
+                <div class="stats-box">
+                    <h3 style="text-align: center; margin-bottom: 1.5rem;">Season Highlights</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">8th</span>
+                            <span class="stat-label">Grade Varsity</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">Youth</span>
+                            <span class="stat-label">Super Bowl Champ</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Heart & Character</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">∞</span>
+                            <span class="stat-label">Impact on Others</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>The Making of a Champion</h3>
+
+                <p>From that six-year-old who got back up after being flattened in youth football to the middle schooler who chose kindness over popularity, Sequel Patterson's journey is just beginning. But one thing is already clear: he's not just building a legacy on the court or field—he's building one in the hearts of everyone he meets.</p>
+
+                <p>As Rodriguez Patterson knew from that moment when his six-year-old son got back up and said it didn't hurt, Sequel was different. Now we all get to watch that difference make a difference in the lives of others.</p>
+            </div>
+
+            <!-- Share Section -->
+            <div class="share-section">
+                <h3 class="share-title">Share This Story</h3>
+                <div class="share-buttons">
+                    <a href="#" class="share-btn facebook">Share on Facebook</a>
+                    <a href="#" class="share-btn twitter">Share on Twitter</a>
+                    <a href="#" class="share-btn instagram">Share on Instagram</a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <script>
+        // Share button functionality
+        document.querySelectorAll('.share-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const platform = this.classList.contains('facebook') ? 'Facebook' : 
+                                this.classList.contains('twitter') ? 'Twitter' : 'Instagram';
+                alert(`Share on ${platform}\n\nIn a real implementation, this would open the ${platform} sharing dialog.`);
+            });
+        });
+    </script>
+</body>
+</html>
