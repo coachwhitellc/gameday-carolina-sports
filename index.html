@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GameDay Carolina</title>
     <style>
+        :root {
+            --neon-green: #32FF32;
+            --electric-green: #00FF41;
+            --glow-green: #39FF14;
+            --warm-orange: #ff8c42;
+            --warm-gold: #ffa726;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -16,13 +24,89 @@
             line-height: 1.6;
             color: #333;
             overflow-x: hidden;
-            background: linear-gradient(180deg, 
-                #fef7e6 0%, 
-                #fdf4e0 25%, 
-                #fcf1da 50%, 
-                #fbeedd 75%, 
-                #faece0 100%);
+            background: linear-gradient(135deg, 
+                #FFD700 0%,     /* Rich Gold */
+                #F4D03F 15%,    /* Light Gold */
+                #C0C0C0 35%,    /* Silver */
+                #E8E8E8 50%,    /* Light Silver */
+                #B8860B 65%,    /* Dark Gold */
+                #A8A8A8 80%,    /* Medium Silver */
+                #FFD700 100%    /* Rich Gold */
+            );
+            background-size: 400% 400%;
+            animation: metallicFlow 12s ease-in-out infinite;
             min-height: 100vh;
+            position: relative;
+        }
+
+        @keyframes metallicFlow {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+
+        /* Metallic shimmer overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.4) 0%, transparent 20%),
+                radial-gradient(circle at 70% 60%, rgba(255, 215, 0, 0.3) 0%, transparent 25%),
+                radial-gradient(circle at 20% 80%, rgba(192, 192, 192, 0.3) 0%, transparent 20%),
+                linear-gradient(45deg, 
+                    transparent 30%, 
+                    rgba(255, 255, 255, 0.1) 50%, 
+                    transparent 70%);
+            background-size: 300px 300px, 400px 400px, 350px 350px, 100% 100%;
+            animation: metallicShimmer 8s ease-in-out infinite, 
+                       shimmerMove 15s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes metallicShimmer {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.9; }
+        }
+
+        @keyframes shimmerMove {
+            0% { background-position: 0px 0px, 0px 0px, 0px 0px, -100% 0%; }
+            100% { background-position: 300px 300px, 400px 400px, 350px 350px, 200% 0%; }
+        }
+
+        /* Enhanced metallic particle effects */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(1px 1px at 20% 30%, rgba(255, 215, 0, 0.8), transparent),
+                radial-gradient(1px 1px at 40% 70%, rgba(192, 192, 192, 0.8), transparent),
+                radial-gradient(1px 1px at 90% 40%, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(1px 1px at 60% 90%, rgba(184, 134, 11, 0.8), transparent);
+            background-size: 200px 200px, 300px 300px, 250px 250px, 400px 400px;
+            animation: metallicSparkle 10s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes metallicSparkle {
+            0%, 100% { 
+                background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+                opacity: 0.3;
+            }
+            50% { 
+                background-position: 200px 200px, 300px 300px, 250px 250px, 400px 400px;
+                opacity: 0.6;
+            }
         }
 
         /* Hero Section */
@@ -104,8 +188,40 @@
             text-transform: uppercase;
             letter-spacing: 4px;
             margin-bottom: 1rem;
-            text-shadow: 4px 4px 8px rgba(0,0,0,0.5);
-            animation: pulse 3s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(50, 255, 50, 0.5), 
+                         0 0 40px rgba(0, 255, 65, 0.3),
+                         4px 4px 8px rgba(0,0,0,0.5);
+            animation: neonPulse 3s ease-in-out infinite;
+            background: linear-gradient(45deg, #fff, var(--neon-green), #fff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: neonTextFlow 4s ease-in-out infinite, titleFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes neonTextFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes titleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes neonPulse {
+            0%, 100% { 
+                text-shadow: 0 0 20px rgba(50, 255, 50, 0.5), 
+                            0 0 40px rgba(0, 255, 65, 0.3),
+                            4px 4px 8px rgba(0,0,0,0.5);
+            }
+            50% { 
+                text-shadow: 0 0 30px rgba(50, 255, 50, 0.8), 
+                            0 0 60px rgba(0, 255, 65, 0.6),
+                            0 0 80px rgba(57, 255, 20, 0.4),
+                            4px 4px 8px rgba(0,0,0,0.5);
+            }
         }
 
         .hero-subtitle {
@@ -177,15 +293,23 @@
         }
 
         .nav-links a:hover {
-            color: #ff6b35;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
         }
 
-        /* Section Styling */
+        /* Section Styling with Metallic Glass Effect */
         .section {
             padding: 4rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
-            background: transparent;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         .section-title {
@@ -206,19 +330,39 @@
             transform: translateX(-50%);
             width: 100px;
             height: 4px;
-            background: linear-gradient(90deg, #ff8c42, #ffa726);
+            background: linear-gradient(90deg, var(--neon-green), var(--electric-green), var(--glow-green));
+            box-shadow: 0 0 15px var(--neon-green), 0 0 25px rgba(50, 255, 50, 0.5);
+            animation: underlineGlow 2s ease-in-out infinite alternate;
         }
 
-        /* Scores Section */
+        @keyframes underlineGlow {
+            0% { 
+                box-shadow: 0 0 15px var(--neon-green), 0 0 25px rgba(50, 255, 50, 0.5);
+                width: 100px;
+            }
+            100% { 
+                box-shadow: 0 0 25px var(--neon-green), 0 0 35px rgba(50, 255, 50, 0.8);
+                width: 120px;
+            }
+        }
+
+        /* Scores Section with Metallic Enhancement */
         .scores {
             background: linear-gradient(135deg, 
-                rgba(255,140,66,0.15) 0%, 
-                rgba(255,167,38,0.15) 50%, 
-                rgba(255,183,77,0.15) 100%);
+                rgba(255, 215, 0, 0.2) 0%,
+                rgba(192, 192, 192, 0.15) 50%,
+                rgba(184, 134, 11, 0.2) 100%);
+            backdrop-filter: blur(15px);
             color: #333;
             padding: 4rem 2rem;
-            margin: 0;
+            margin: 2rem auto;
+            border-radius: 30px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
             position: relative;
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                0 15px 35px rgba(0, 0, 0, 0.1),
+                0 0 30px rgba(255, 215, 0, 0.2);
         }
 
         .scores::before {
@@ -228,7 +372,8 @@
             left: 0;
             right: 0;
             height: 100px;
-            background: linear-gradient(to bottom, transparent, rgba(255,140,66,0.1));
+            background: linear-gradient(to bottom, transparent, rgba(255, 215, 0, 0.1));
+            border-radius: 30px 30px 0 0;
         }
 
         .scores::after {
@@ -238,7 +383,8 @@
             left: 0;
             right: 0;
             height: 100px;
-            background: linear-gradient(to top, transparent, rgba(255,140,66,0.1));
+            background: linear-gradient(to top, transparent, rgba(255, 215, 0, 0.1));
+            border-radius: 0 0 30px 30px;
         }
 
         .scores-grid {
@@ -250,18 +396,26 @@
         }
 
         .score-card {
-            background: rgba(255,255,255,0.8);
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.9) 0%,
+                rgba(255, 215, 0, 0.1) 50%,
+                rgba(192, 192, 192, 0.1) 100%);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 2rem;
             text-align: center;
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(255,167,38,0.3);
-            box-shadow: 0 8px 25px rgba(255,140,66,0.15);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                0 8px 25px rgba(255, 215, 0, 0.15),
+                0 0 15px rgba(255, 255, 255, 0.2);
         }
 
         .score-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255,140,66,0.2), 0 0 20px var(--neon-green);
+            border: 2px solid var(--neon-green);
         }
 
         .teams {
@@ -277,47 +431,119 @@
             margin: 1rem 0;
         }
 
-        /* MaxPreps Widget Styling */
-        .widget-container {
+        /* School Link Cards Styling */
+        .school-links-container {
             max-width: 1200px;
             margin: 0 auto 3rem auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
             padding: 0 1rem;
         }
 
-        .maxpreps-widget {
-            background: rgba(255,255,255,0.9);
+        .school-link-card {
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.95) 0%,
+                rgba(255, 215, 0, 0.1) 30%,
+                rgba(192, 192, 192, 0.1) 70%,
+                rgba(255, 255, 255, 0.9) 100%);
+            backdrop-filter: blur(15px);
             border-radius: 15px;
-            padding: 1.5rem;
-            box-shadow: 0 10px 30px rgba(255,140,66,0.15);
-            border: 2px solid rgba(255,140,66,0.2);
-            transition: transform 0.3s ease;
+            padding: 2rem;
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                0 10px 30px rgba(255, 215, 0, 0.15),
+                0 0 20px rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+            text-align: center;
         }
 
-        .maxpreps-widget:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(255,140,66,0.25);
+        .school-link-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.8),
+                0 20px 40px rgba(255, 215, 0, 0.25), 
+                0 0 25px var(--neon-green),
+                0 0 40px rgba(255, 255, 255, 0.4);
+            border-color: var(--neon-green);
         }
 
-        .maxpreps-widget iframe {
-            background: white;
-            border-radius: 8px;
+        .school-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--warm-orange);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .school-link-card:hover .school-name {
+            color: var(--neon-green);
+            text-shadow: 0 0 10px rgba(50, 255, 50, 0.6);
+        }
+
+        .school-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .score-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--warm-orange), var(--warm-gold));
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255,140,66,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .score-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--neon-green), var(--electric-green));
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .score-button:hover::before {
+            left: 0;
+        }
+
+        .score-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(50, 255, 50, 0.4), 0 0 20px var(--neon-green);
+            color: white;
+            text-decoration: none;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .school-mascot {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
         }
 
         @media (max-width: 768px) {
-            .widget-container {
+            .school-links-container {
                 grid-template-columns: 1fr;
                 padding: 0 0.5rem;
+                gap: 1rem;
             }
             
-            .maxpreps-widget {
-                padding: 1rem;
-            }
-            
-            .maxpreps-widget iframe {
-                height: 350px;
+            .school-link-card {
+                padding: 1.5rem;
             }
         }
 
@@ -366,7 +592,9 @@
             color: #fff;
             text-transform: uppercase;
             position: relative;
-            text-shadow: 0 0 20px rgba(255,215,0,0.8), 0 0 40px rgba(255,215,0,0.4);
+            text-shadow: 0 0 20px rgba(255,215,0,0.8), 
+                         0 0 40px rgba(255,215,0,0.4),
+                         0 0 60px var(--neon-green);
             animation: spotlightGlow 3s ease-in-out infinite alternate;
         }
 
@@ -378,18 +606,29 @@
             transform: translateX(-50%);
             width: 150px;
             height: 6px;
-            background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
-            box-shadow: 0 0 15px rgba(255,215,0,0.6);
-            animation: titleUnderlineGlow 2s ease-in-out infinite alternate;
+            background: linear-gradient(90deg, #FFD700, var(--neon-green), #FFA500, var(--electric-green));
+            background-size: 300% 300%;
+            box-shadow: 0 0 15px rgba(255,215,0,0.6), 0 0 25px var(--neon-green);
+            animation: titleUnderlineGlow 2s ease-in-out infinite alternate, rainbowFlow 3s linear infinite;
+        }
+
+        @keyframes rainbowFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
         }
 
         @keyframes spotlightGlow {
             0% { 
-                text-shadow: 0 0 20px rgba(255,215,0,0.8), 0 0 40px rgba(255,215,0,0.4);
+                text-shadow: 0 0 20px rgba(255,215,0,0.8), 
+                            0 0 40px rgba(255,215,0,0.4),
+                            0 0 60px var(--neon-green);
                 transform: scale(1);
             }
             100% { 
-                text-shadow: 0 0 30px rgba(255,215,0,1), 0 0 60px rgba(255,215,0,0.6), 0 0 80px rgba(255,215,0,0.3);
+                text-shadow: 0 0 30px rgba(255,215,0,1), 
+                            0 0 60px rgba(255,215,0,0.6), 
+                            0 0 80px rgba(255,215,0,0.3),
+                            0 0 100px var(--neon-green);
                 transform: scale(1.02);
             }
         }
@@ -558,7 +797,7 @@
         }
 
         .carousel-btn {
-            background: #ff8c42;
+            background: linear-gradient(45deg, var(--warm-orange), var(--neon-green));
             color: white;
             border: none;
             padding: 12px 24px;
@@ -566,22 +805,49 @@
             border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(50, 255, 50, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--electric-green), var(--glow-green));
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .carousel-btn:hover::before {
+            left: 0;
         }
 
         .carousel-btn:hover {
-            background: #ff7043;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(50, 255, 50, 0.5), 0 0 20px var(--neon-green);
         }
 
-        /* Sponsors Section */
+        /* Sponsors Section with Metallic Glass */
         .sponsors {
             background: linear-gradient(135deg, 
-                rgba(255,183,77,0.1) 0%, 
-                rgba(255,204,128,0.1) 50%, 
-                rgba(255,224,178,0.1) 100%);
+                rgba(192, 192, 192, 0.15) 0%,
+                rgba(255, 215, 0, 0.1) 50%,
+                rgba(255, 255, 255, 0.15) 100%);
+            backdrop-filter: blur(15px);
             padding: 4rem 2rem;
             text-align: center;
             position: relative;
+            margin: 2rem auto;
+            border-radius: 30px;
+            border: 2px solid rgba(192, 192, 192, 0.3);
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                0 15px 35px rgba(0, 0, 0, 0.1);
         }
 
         .sponsors::before {
@@ -591,7 +857,8 @@
             left: 0;
             right: 0;
             height: 100px;
-            background: linear-gradient(to bottom, transparent, rgba(255,183,77,0.05));
+            background: linear-gradient(to bottom, transparent, rgba(192, 192, 192, 0.05));
+            border-radius: 30px 30px 0 0;
         }
 
         .sponsors-grid {
@@ -603,15 +870,27 @@
         }
 
         .sponsor-card {
-            background: white;
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.9) 0%,
+                rgba(255, 215, 0, 0.1) 50%,
+                rgba(255, 255, 255, 0.8) 100%);
+            backdrop-filter: blur(10px);
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                0 10px 25px rgba(255, 215, 0, 0.1),
+                0 0 15px rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease;
         }
 
         .sponsor-card:hover {
             transform: translateY(-5px);
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.8),
+                0 15px 35px rgba(255, 215, 0, 0.2),
+                0 0 25px rgba(255, 255, 255, 0.3);
         }
 
         .sponsor-logo {
@@ -627,15 +906,22 @@
             margin-bottom: 1rem;
         }
 
-        /* Fits Section */
+        /* Fits Section with Metallic Theme */
         .fits {
             padding: 4rem 2rem;
             background: linear-gradient(135deg, 
-                rgba(255,167,38,0.15) 0%, 
-                rgba(255,140,66,0.15) 50%, 
-                rgba(255,112,67,0.15) 100%);
+                rgba(184, 134, 11, 0.2) 0%,
+                rgba(255, 215, 0, 0.15) 50%,
+                rgba(192, 192, 192, 0.15) 100%);
+            backdrop-filter: blur(15px);
             color: #333;
             position: relative;
+            margin: 2rem auto;
+            border-radius: 30px;
+            border: 2px solid rgba(184, 134, 11, 0.3);
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                0 15px 35px rgba(0, 0, 0, 0.1);
         }
 
         .fits::before {
@@ -645,7 +931,8 @@
             left: 0;
             right: 0;
             height: 100px;
-            background: linear-gradient(to bottom, transparent, rgba(255,167,38,0.1));
+            background: linear-gradient(to bottom, transparent, rgba(184, 134, 11, 0.1));
+            border-radius: 30px 30px 0 0;
         }
 
         .fits::after {
@@ -655,7 +942,8 @@
             left: 0;
             right: 0;
             height: 100px;
-            background: linear-gradient(to top, transparent, rgba(255,167,38,0.1));
+            background: linear-gradient(to top, transparent, rgba(184, 134, 11, 0.1));
+            border-radius: 0 0 30px 30px;
         }
 
         .fits-grid {
@@ -809,15 +1097,391 @@
             border-color: #ff7043;
         }
 
-        .upload-text {
-            font-weight: bold;
-            color: #ff8c42;
-            margin-bottom: 0.5rem;
+        /* Futuristic HUD-style score displays */
+        .score {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--warm-orange);
+            margin: 1rem 0;
+            position: relative;
+            text-shadow: 0 0 10px rgba(255, 140, 66, 0.5);
         }
 
-        .upload-subtext {
-            color: #666;
-            font-size: 0.9rem;
+        .score-card:hover .score {
+            color: var(--neon-green);
+            text-shadow: 0 0 15px var(--neon-green), 0 0 25px rgba(50, 255, 50, 0.3);
+            animation: scoreFlicker 0.5s ease-in-out;
+        }
+
+        @keyframes scoreFlicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Enhanced article card hover effects */
+        .article-card:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2), 0 0 20px var(--neon-green);
+        }
+
+        /* Animated mascot emojis */
+        .school-mascot {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .school-link-card:hover .school-mascot {
+            transform: scale(1.2) rotate(10deg);
+            filter: drop-shadow(0 0 10px var(--neon-green));
+        }
+
+        /* Glowing upload area */
+        .upload-area {
+            border: 3px dashed var(--warm-orange);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+            background: rgba(255,140,66,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .upload-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(50, 255, 50, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .upload-area:hover::before {
+            left: 100%;
+        }
+
+        .upload-area:hover {
+            background: rgba(50, 255, 50, 0.1);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 20px rgba(50, 255, 50, 0.3);
+        }
+
+        .upload-text {
+            font-weight: bold;
+            color: var(--warm-orange);
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .upload-area:hover .upload-text {
+            color: var(--neon-green);
+            text-shadow: 0 0 10px rgba(50, 255, 50, 0.6);
+        }
+
+        /* Band Section - Musical Theme */
+        .band-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, 
+                rgba(75, 0, 130, 0.9) 0%,
+                rgba(25, 25, 112, 0.8) 50%,
+                rgba(0, 0, 0, 0.9) 100%),
+            url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="musicNotes" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><circle fill="%23FFD700" opacity="0.1" cx="20" cy="30" r="3"/><circle fill="%23FFD700" opacity="0.1" cx="80" cy="60" r="3"/><path fill="%23FFD700" opacity="0.1" d="M40 40 L40 70 Q45 75 50 70 L50 40 Q45 35 40 40"/><path fill="%23FFD700" opacity="0.1" d="M60 20 L60 50 Q65 55 70 50 L70 20 Q65 15 60 20"/></pattern></defs><rect fill="url(%23musicNotes)" width="1200" height="800"/></svg>');
+            background-size: cover, 200px 200px;
+            background-position: center, 0 0;
+            background-attachment: fixed, scroll;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        .band-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                rgba(50, 255, 50, 0.1) 0%,
+                rgba(255, 215, 0, 0.1) 25%,
+                rgba(255, 140, 66, 0.1) 50%,
+                rgba(138, 43, 226, 0.1) 75%,
+                rgba(50, 255, 50, 0.1) 100%
+            );
+            animation: musicalAura 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes musicalAura {
+            0%, 100% { opacity: 0.3; transform: rotate(0deg) scale(1); }
+            50% { opacity: 0.6; transform: rotate(180deg) scale(1.1); }
+        }
+
+        .band-title {
+            font-size: 4rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            position: relative;
+            background: linear-gradient(45deg, #FFD700, var(--neon-green), #FF69B4, #00BFFF);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: musicalTextFlow 4s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .band-title::before {
+            content: '🎵';
+            position: absolute;
+            left: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            animation: noteFloat 3s ease-in-out infinite;
+        }
+
+        .band-title::after {
+            content: '🎶';
+            position: absolute;
+            right: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            animation: noteFloat 3s ease-in-out infinite 1.5s;
+        }
+
+        @keyframes musicalTextFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes noteFloat {
+            0%, 100% { transform: translateY(-50%) rotate(0deg); }
+            50% { transform: translateY(-70%) rotate(10deg); }
+        }
+
+        /* Floating Musical Notes */
+        .floating-notes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .musical-note {
+            position: absolute;
+            font-size: 2rem;
+            color: #FFD700;
+            opacity: 0.7;
+            animation: floatUp 8s linear infinite;
+        }
+
+        .musical-note:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .musical-note:nth-child(2) { left: 25%; animation-delay: 2s; }
+        .musical-note:nth-child(3) { left: 50%; animation-delay: 4s; }
+        .musical-note:nth-child(4) { left: 75%; animation-delay: 6s; }
+        .musical-note:nth-child(5) { left: 90%; animation-delay: 1s; }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Band Content Grid */
+        .band-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .band-media-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .band-media-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 215, 0, 0.1) 50%,
+                transparent 70%
+            );
+            animation: shimmer 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .band-media-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 
+                        0 0 30px rgba(255, 215, 0, 0.4),
+                        0 0 50px var(--neon-green);
+            border-color: var(--neon-green);
+        }
+
+        .media-type-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .media-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #FFD700;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .media-description {
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .media-upload-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(45deg, #9932CC, var(--neon-green), #FFD700);
+            background-size: 300% 300%;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: gradientPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientPulse {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .media-upload-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .media-upload-btn:hover::before {
+            left: 100%;
+        }
+
+        .media-upload-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(153, 50, 204, 0.4), 
+                        0 0 30px var(--neon-green);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Rhythm Visualization */
+        .rhythm-bars {
+            display: flex;
+            justify-content: center;
+            align-items: end;
+            height: 60px;
+            margin: 2rem 0;
+            gap: 3px;
+        }
+
+        .rhythm-bar {
+            width: 4px;
+            background: linear-gradient(to top, var(--neon-green), #FFD700);
+            border-radius: 2px;
+            animation: rhythm 1.5s ease-in-out infinite;
+        }
+
+        .rhythm-bar:nth-child(1) { height: 20px; animation-delay: 0s; }
+        .rhythm-bar:nth-child(2) { height: 35px; animation-delay: 0.1s; }
+        .rhythm-bar:nth-child(3) { height: 50px; animation-delay: 0.2s; }
+        .rhythm-bar:nth-child(4) { height: 30px; animation-delay: 0.3s; }
+        .rhythm-bar:nth-child(5) { height: 45px; animation-delay: 0.4s; }
+        .rhythm-bar:nth-child(6) { height: 25px; animation-delay: 0.5s; }
+        .rhythm-bar:nth-child(7) { height: 40px; animation-delay: 0.6s; }
+        .rhythm-bar:nth-child(8) { height: 55px; animation-delay: 0.7s; }
+
+        @keyframes rhythm {
+            0%, 100% { transform: scaleY(0.3); opacity: 0.7; }
+            50% { transform: scaleY(1); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .band-title {
+                font-size: 2.5rem;
+            }
+            
+            .band-title::before,
+            .band-title::after {
+                display: none;
+            }
+            
+            .band-content {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
         }
 
         /* Site Counter Styling */
@@ -855,9 +1519,19 @@
         .counter-number {
             font-size: 2.5rem;
             font-weight: 900;
-            color: #ff8c42;
+            color: var(--warm-orange);
             display: block;
             margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--warm-orange), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: counterGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes counterGlow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(50, 255, 50, 0.3)); }
+            50% { filter: drop-shadow(0 0 15px rgba(50, 255, 50, 0.6)); }
         }
 
         .counter-label {
@@ -886,6 +1560,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#scores">Scores</a></li>
                 <li><a href="#articles">Articles</a></li>
+                <li><a href="#band">Band</a></li>
                 <li><a href="#fits">Fits</a></li>
                 <li><a href="#schools">Schools</a></li>
                 <li><a href="#sponsors">Sponsors</a></li>
@@ -1019,28 +1694,28 @@
             </div>
         </div>
 
-        <!-- Manual Score Cards (Your Custom Updates) -->
-        <h3 style="text-align: center; color: #333; margin: 3rem 0 2rem 0;">Featured Game Highlights</h3>
+        <!-- Featured Game Highlights -->
+        <h3 style="text-align: center; color: #333; margin: 3rem 0 2rem 0;">This Week's Featured Games</h3>
         <div class="scores-grid">
             <div class="score-card">
-                <div class="teams">Panthers vs Eagles</div>
-                <div class="score">28 - 21</div>
-                <div>Friday Night Lights</div>
+                <div class="teams">Indian Land vs Nation Ford</div>
+                <div class="score">35 - 28</div>
+                <div>Rivalry Game - Friday Night</div>
             </div>
             <div class="score-card">
-                <div class="teams">Warriors vs Knights</div>
-                <div class="score">42 - 35</div>
-                <div>Championship Game</div>
+                <div class="teams">Fort Mill vs Catawba Ridge</div>
+                <div class="score">42 - 21</div>
+                <div>District Championship</div>
             </div>
             <div class="score-card">
-                <div class="teams">Tigers vs Rams</div>
-                <div class="score">14 - 7</div>
-                <div>Playoff Semifinal</div>
-            </div>
-            <div class="score-card">
-                <div class="teams">Hawks vs Lions</div>
-                <div class="score">21 - 17</div>
+                <div class="teams">York vs Clover</div>
+                <div class="score">24 - 17</div>
                 <div>Homecoming Game</div>
+            </div>
+            <div class="score-card">
+                <div class="teams">Lancaster vs AJ</div>
+                <div class="score">31 - 14</div>
+                <div>Regional Playoff</div>
             </div>
         </div>
     </section>
@@ -1088,6 +1763,104 @@
             <div class="carousel-nav">
                 <button class="carousel-btn" onclick="prevArticle()">← Previous</button>
                 <button class="carousel-btn" onclick="nextArticle()">Next →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Band Section -->
+    <section id="band" class="band-section">
+        <div class="floating-notes">
+            <div class="musical-note">🎵</div>
+            <div class="musical-note">🎶</div>
+            <div class="musical-note">♪</div>
+            <div class="musical-note">♫</div>
+            <div class="musical-note">🎼</div>
+        </div>
+        
+        <h2 class="band-title">Marching Band Spotlight</h2>
+        
+        <div class="rhythm-bars">
+            <div class="rhythm-bar"></div>
+            <div class="rhythm-bar"></div>
+            <div class="rhythm-bar"></div>
+            <div class="rhythm-bar"></div>
+            <div class="rhythm-bar"></div>
+            <div class="rhythm-bar"></div>
+            <div class="rhythm-bar"></div>
+            <div class="rhythm-bar"></div>
+        </div>
+        
+        <div class="band-content">
+            <!-- Performance Videos -->
+            <div class="band-media-card">
+                <div class="media-type-icon">🎬</div>
+                <h3 class="media-title">Halftime Performances</h3>
+                <p class="media-description">
+                    Watch our incredible halftime shows! From homecoming spectacles to championship performances.
+                </p>
+                <a href="#" class="media-upload-btn" onclick="uploadBandVideo()">
+                    📹 Upload Performance Videos
+                </a>
+            </div>
+            
+            <!-- Band Photos -->
+            <div class="band-media-card">
+                <div class="media-type-icon">📸</div>
+                <h3 class="media-title">Band Gallery</h3>
+                <p class="media-description">
+                    Behind-the-scenes photos, competition shots, and memorable moments from our musical journey.
+                </p>
+                <a href="#" class="media-upload-btn" onclick="uploadBandPhotos()">
+                    📷 Upload Band Photos
+                </a>
+            </div>
+            
+            <!-- Competition Highlights -->
+            <div class="band-media-card">
+                <div class="media-type-icon">🏆</div>
+                <h3 class="media-title">Competition Highlights</h3>
+                <p class="media-description">
+                    State championships, regional competitions, and award-winning performances that make us proud.
+                </p>
+                <a href="#" class="media-upload-btn" onclick="uploadCompetitionMedia()">
+                    🎺 Upload Competition Media
+                </a>
+            </div>
+            
+            <!-- Student Spotlights -->
+            <div class="band-media-card">
+                <div class="media-type-icon">⭐</div>
+                <h3 class="media-title">Student Musicians</h3>
+                <p class="media-description">
+                    Featuring our talented musicians - solo performances, section leaders, and rising stars.
+                </p>
+                <a href="#" class="media-upload-btn" onclick="uploadStudentSpotlight()">
+                    🎭 Upload Student Features
+                </a>
+            </div>
+            
+            <!-- Director's Corner -->
+            <div class="band-media-card">
+                <div class="media-type-icon">🎩</div>
+                <h3 class="media-title">Director's Corner</h3>
+                <p class="media-description">
+                    Messages from our band directors, rehearsal insights, and the passion behind the music.
+                </p>
+                <a href="#" class="media-upload-btn" onclick="uploadDirectorContent()">
+                    🎯 Upload Director Content
+                </a>
+            </div>
+            
+            <!-- Spirit & Traditions -->
+            <div class="band-media-card">
+                <div class="media-type-icon">🎪</div>
+                <h3 class="media-title">Band Traditions</h3>
+                <p class="media-description">
+                    Our unique traditions, fight songs, and the spirit that makes our band community special.
+                </p>
+                <a href="#" class="media-upload-btn" onclick="uploadTraditions()">
+                    🎊 Upload Tradition Content
+                </a>
             </div>
         </div>
     </section>
@@ -1364,7 +2137,12 @@
             alert(`Opening feature story for: ${schoolNames[schoolId]}\n\nThis would show the full school feature with player profiles, game highlights, and team stats!`);
         }
         
-        // Fit upload handler
+        .upload-subtext {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Fit upload handler */
         function uploadFit() {
             alert('Upload Your Fit!\n\nThis would open a photo upload dialog where you can share your game day outfit with the community!');
         }
@@ -1418,6 +2196,36 @@
         
         // Initialize counters when page loads
         document.addEventListener('DOMContentLoaded', initializeCounters);
+        
+        // Band upload handlers
+        function uploadBandVideo() {
+            alert('🎬 Upload Halftime Performance Videos!\n\nThis would open a video upload dialog for:\n• Halftime shows\n• Pep rally performances\n• Special event music\n• Game day entertainment');
+        }
+        
+        function uploadBandPhotos() {
+            alert('📸 Upload Band Gallery Photos!\n\nThis would open a photo upload for:\n• Band group photos\n• Section photos\n• Behind-the-scenes shots\n• Uniform and instrument photos');
+        }
+        
+        function uploadCompetitionMedia() {
+            alert('🏆 Upload Competition Highlights!\n\nThis would open an upload for:\n• Competition performance videos\n• Award ceremony photos\n• Championship moments\n• Judge feedback highlights');
+        }
+        
+        function uploadStudentSpotlight() {
+            alert('⭐ Upload Student Musician Features!\n\nThis would open uploads for:\n• Solo performance videos\n• Student interviews\n• Senior spotlights\n• Rising star features');
+        }
+        
+        function uploadDirectorContent() {
+            alert('🎩 Upload Director\'s Corner Content!\n\nThis would open uploads for:\n• Director messages\n• Rehearsal insights\n• Music education content\n• Leadership perspectives');
+        }
+        
+        function uploadTraditions() {
+            alert('🎪 Upload Band Tradition Content!\n\nThis would open uploads for:\n• Fight song performances\n• Pre-game rituals\n• Band camp memories\n• Spirit week activities');
+        }
+        
+        // Fit upload handler  
+        function uploadFit() {
+            alert('Upload Your Fit!\n\nThis would open a photo upload dialog where you can share your game day outfit with the community!');
+        }
     </script>
 </body>
 </html>
