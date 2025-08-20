@@ -188,40 +188,41 @@
             text-transform: uppercase;
             letter-spacing: 4px;
             margin-bottom: 1rem;
-            text-shadow: 0 0 20px rgba(50, 255, 50, 0.5), 
-                         0 0 40px rgba(0, 255, 65, 0.3),
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 
+                         0 0 40px rgba(255, 255, 255, 0.5),
                          4px 4px 8px rgba(0,0,0,0.5);
-            animation: neonPulse 3s ease-in-out infinite;
-            background: linear-gradient(45deg, #fff, var(--neon-green), #fff);
-            background-size: 300% 300%;
+            animation: titleColorFade 8s ease-in-out infinite, titleFloat 6s ease-in-out infinite;
+            background: linear-gradient(45deg, 
+                #FFD700,      /* Gold */
+                #FF6B35,      /* Orange */
+                #32FF32,      /* Lime Green */
+                #00BFFF,      /* Sky Blue */
+                #FF69B4,      /* Hot Pink */
+                #9932CC,      /* Purple */
+                #FF4500,      /* Red Orange */
+                #FFD700       /* Back to Gold */
+            );
+            background-size: 800% 800%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: neonTextFlow 4s ease-in-out infinite, titleFloat 6s ease-in-out infinite;
         }
 
-        @keyframes neonTextFlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        @keyframes titleColorFade {
+            0% { background-position: 0% 50%; }
+            12.5% { background-position: 12.5% 50%; }
+            25% { background-position: 25% 50%; }
+            37.5% { background-position: 37.5% 50%; }
+            50% { background-position: 50% 50%; }
+            62.5% { background-position: 62.5% 50%; }
+            75% { background-position: 75% 50%; }
+            87.5% { background-position: 87.5% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
         @keyframes titleFloat {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
-        }
-
-        @keyframes neonPulse {
-            0%, 100% { 
-                text-shadow: 0 0 20px rgba(50, 255, 50, 0.5), 
-                            0 0 40px rgba(0, 255, 65, 0.3),
-                            4px 4px 8px rgba(0,0,0,0.5);
-            }
-            50% { 
-                text-shadow: 0 0 30px rgba(50, 255, 50, 0.8), 
-                            0 0 60px rgba(0, 255, 65, 0.6),
-                            0 0 80px rgba(57, 255, 20, 0.4),
-                            4px 4px 8px rgba(0,0,0,0.5);
-            }
         }
 
         .hero-subtitle {
@@ -1731,6 +1732,17 @@
         <h2 class="spotlight-title">Spotlight</h2>
         <div class="articles-carousel">
             <div class="carousel-container" id="articlesCarousel">
+                <!-- Sequel Patterson Article -->
+                <div class="article-card" onclick="openArticle('sequel-patterson-feature')">
+                    <div class="article-image" style="background-image: url('sequel-patterson.jpg'); background-size: cover; background-position: center; background-color: #ff8c42; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                        Sequel Patterson
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Sequel Patterson: Dominating the Field</h3>
+                        <p class="article-excerpt">Local standout athlete making his mark on high school sports with impressive performances.</p>
+                    </div>
+                </div>
+                
                 <!-- Jameson Terrell Article -->
                 <div class="article-card" onclick="openArticle('jameson-terrell-feature')">
                     <div class="article-image" style="background-image: url('Jameson Terrell.jpg'); background-size: cover; background-position: center;"></div>
@@ -1755,15 +1767,6 @@
                     <div class="article-content">
                         <h3 class="article-title">Coach of the Year</h3>
                         <p class="article-excerpt">Meet the coach who turned a losing team into champions this season.</p>
-                    </div>
-                </div>
-                
-                <!-- Player Feature -->
-                <div class="article-card" onclick="openArticle('player-feature')">
-                    <div class="article-image">Player Action</div>
-                    <div class="article-content">
-                        <h3 class="article-title">Record Breaking Run</h3>
-                        <p class="article-excerpt">Running back breaks school record with 300 yards in single game.</p>
                     </div>
                 </div>
             </div>
@@ -2085,6 +2088,8 @@
         ];
         
         function rotateHeroImages() {
+            if (heroImages.length === 0) return;
+            
             heroImages[currentHeroImage].classList.remove('active');
             currentHeroImage = (currentHeroImage + 1) % heroImages.length;
             heroImages[currentHeroImage].classList.add('active');
@@ -2094,8 +2099,10 @@
         }
         
         // Start hero rotation with longer intervals for sports scenes
-        heroImages[0].classList.add('active');
-        setInterval(rotateHeroImages, 6000); // 6 seconds per image
+        if (heroImages.length > 0) {
+            heroImages[0].classList.add('active');
+            setInterval(rotateHeroImages, 5000); // 5 seconds per image
+        }
         
         // Articles carousel - Fixed functionality
         let currentArticleIndex = 0;
@@ -2163,8 +2170,8 @@
             
             // Route to appropriate article pages
             const articleRoutes = {
+                'sequel-patterson-feature': 'sequel-patterson-article.html',
                 'jameson-terrell-feature': 'jameson-terrell-article.html',
-                'add-your-article': '#', // Replace with your article URL
                 'championship-bound': 'championship-article.html',
                 'coach-spotlight': 'coach-spotlight-article.html'
             };
